@@ -1,4 +1,6 @@
 ﻿using System;
+using OperatorsAssignment.Models;
+using OperatorsAssignment.Controllers;
 
 namespace OperatorsAssignment
 {
@@ -6,15 +8,46 @@ namespace OperatorsAssignment
     {
         static void Main(string[] args)
         {
-            Employee emp1 = new Employee() { Id = 1, FirstName = "John", LastName = "Doe" };
-            Employee emp2 = new Employee() { Id = 1, FirstName = "Jane", LastName = "Smith" };
-            Employee emp3 = new Employee() { Id = 2, FirstName = "Mark", LastName = "Brown" };
+            // Create controller
+            InsureeController controller = new InsureeController();
 
-            // Karşılaştırmaları yap
-            Console.WriteLine(emp1 == emp2);  // True (çünkü Id aynı)
-            Console.WriteLine(emp1 == emp3);  // False (çünkü Id farklı)
+            // Example insurees
+            Insuree person1 = new Insuree
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Age = 20,
+                CarMake = "Porsche",
+                CarModel = "911 Carrera",
+                CarYear = 2018,
+                SpeedingTickets = 2,
+                HasDUI = false,
+                FullCoverage = true
+            };
 
-            Console.ReadLine();
+            Insuree person2 = new Insuree
+            {
+                FirstName = "Sarah",
+                LastName = "Miller",
+                Age = 30,
+                CarMake = "Toyota",
+                CarModel = "Camry",
+                CarYear = 2010,
+                SpeedingTickets = 0,
+                HasDUI = true,
+                FullCoverage = false
+            };
+
+            // Calculate quotes
+            decimal quote1 = controller.CalculateQuote(person1);
+            decimal quote2 = controller.CalculateQuote(person2);
+
+            // Show results
+            Console.WriteLine($"{person1.FirstName} {person1.LastName}'s Quote: ${quote1}");
+            Console.WriteLine($"{person2.FirstName} {person2.LastName}'s Quote: ${quote2}");
+
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
         }
     }
 }
